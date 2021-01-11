@@ -7,9 +7,9 @@ html
           div(class="d-flex ml-3 mt-3 mb-3")
             a(href="/")= `AWS`
             span(class="ml-1 mr-1")= " / "
-            a(href="/sqs")= `SQS`
+            a(href="/dynamo")= `Dynamo`
           div(class="d-flex ml-3 mt-3 mb-3")
-            button(class="btn btn-secondary mr-2", onClick="createQueue()")= "Create queue"
+            button(class="btn btn-secondary mr-2", onClick="createTable()")= "Create table"
           div(class="container")
             table(class="table table-striped table-bordered", id="tableList", style="width:100%")
               thead
@@ -18,15 +18,15 @@ html
                   th= "Items"
                   th= "Actions"
               tbody
-                each i in queues
+                each i in tables
                   tr
                     td
-                      a(href="/sqs/#{i.name}/body")= i.name
+                      a(href="/dynamo/" + i.name)= i.name
                     td
                       span= i.itemsSize
                     td
                       div(class="d-flex justify-content-center")
-                        button(type="button", class="btn btn-warning mr-2", onClick='purgeQueue(\'' + i.name + '\')')= "Purge"
-                        button(type="button", class="btn btn-danger ml-2", onClick='deleteQueue(\'' + i.name + '\')')= "Delete"
-    script(src='/javascripts/sqs/sqs.js')
+                        button(type="button", class="btn btn-warning mr-2", onClick='purgeTable(\'' + i.name + '\')')= "Purge"
+                        button(type="button", class="btn btn-danger ml-2", onClick='deleteTable(\'' + i.name + '\')')= "Delete"
+    script(src='/javascripts/dynamo/dynamo.js')
     script(src='/javascripts/httpRequest.js')

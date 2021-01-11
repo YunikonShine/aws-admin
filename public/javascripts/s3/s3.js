@@ -16,3 +16,7 @@ function deleteBucket(bucketName) {
     location.reload();
   });
 }
+
+function createBucket() {
+  window.location = "/s3/create";
+}

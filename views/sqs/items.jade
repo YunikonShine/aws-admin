@@ -15,7 +15,8 @@ html
       div(class="row mb-3")
         div(class="col-md-12")
           button(class="btn btn-success mr-2", onClick="setUrl('/sqs/#{queueName}/body')")= "Body"
-          button(class="btn btn-primary ml-2", onClick="setUrl('/sqs/#{queueName}/full')")= "Full message"
+          button(class="btn btn-primary mr-2 ml-2", onClick="setUrl('/sqs/#{queueName}/full')")= "Full message"
+          button(class="btn btn-info ml-2", onClick="setUrl('/sqs/#{queueName}/meta')")= "Meta"
       div(class="row")
         div(class="col-md-12")
           div(id="editor")

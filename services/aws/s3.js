@@ -1,6 +1,4 @@
 const AWS = require("aws-sdk");
-const fs = require("fs");
-const path = require("path");
 
 const s3 = new AWS.S3({
   endpoint: "http://localhost:4566",
@@ -63,9 +61,27 @@ const deleteItem = async (Bucket, Key) => {
   await s3.deleteObject({ Bucket, Key }).promise();
 };
 
+const createBucket = async (Bucket) => {
+  await s3.createBucket({ Bucket }).promise();
+};
+
+const getMeta = async (Bucket) => {
+  let Lifecycle = await s3
+    .getBucketLifecycleConfiguration({ Bucket })
+    .promise()
+    .catch((i) => {});
+  let Notification = await s3
+    .getBucketNotificationConfiguration({ Bucket })
+    .promise();
+
+  return { Lifecycle, Notification };
+};
+
 exports.listBuckets = listBuckets;
 exports.listItems = listItems;
 exports.deleteBucket = deleteBucket;
 exports.purgueBucket = purgueBucket;
 exports.uploadItem = uploadItem;
 exports.deleteItem = deleteItem;
+exports.createBucket = createBucket;
+exports.getMeta = getMeta;

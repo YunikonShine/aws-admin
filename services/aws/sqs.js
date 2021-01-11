@@ -85,8 +85,27 @@ const deleteMessages = async (QueueName) => {
   return sqs.purgeQueue({ QueueUrl }).promise();
 };
 
+const createQueue = async (queueParams) => {
+  let params = {
+    QueueName: queueParams.name,
+    Attributes: {
+      DelaySeconds: queueParams.delay,
+      MessageRetentionPeriod: queueParams.retention,
+    },
+  };
+
+  await sqs.createQueue(params).promise();
+};
+
+const getMeta = async (QueueName) => {
+  let QueueUrl = (await sqs.getQueueUrl({ QueueName }).promise()).QueueUrl;
+  return (await sqs.getQueueAttributes({ QueueUrl }).promise());
+};
+
 exports.listQueue = listQueue;
 exports.getQueueMessages = getQueueMessages;
 exports.getQueueBodyMessages = getQueueBodyMessages;
 exports.deleteSQS = deleteSQS;
 exports.deleteMessages = deleteMessages;
+exports.createQueue = createQueue;
+exports.getMeta = getMeta;

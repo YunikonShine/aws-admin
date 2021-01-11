@@ -60,3 +60,7 @@ function deleteItem(itemName) {
     location.reload();
   });
 }
+
+function setUrl(url) {
+  window.location = url;
+}

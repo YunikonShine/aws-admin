@@ -1,0 +1,33 @@
+html
+  include ../includes/bootstrap.jade
+  body
+    div(class="container-fluid")
+      div(class="row")
+        div(class="col-md-12")
+          div(class="d-flex ml-3 mt-3 mb-3")
+            a(href="/")= `AWS`
+            span(class="ml-1 mr-1")= " / "
+            a(href="/sqs")= `SQS`
+            span(class="ml-1 mr-1")= " / "
+            a(href="/sqs/create")= `Create queue`
+      div(class="container")
+        div(class="row")
+          h3="Create queue"
+        div(class="row")
+          div(class="col-md-12")
+            div(class="form-group")
+              label="Queue name"
+              input(class="form-control", name="queue-name")
+        div(class="row")
+          div(class="col-md-6")
+            div(class="form-group")
+              label="Delay seconds"
+              input(class="form-control", type="number", min=1, value="0", name="queue-delay")
+          div(class="col-md-6")
+            div(class="form-group")
+              label="Message retention period"
+              input(class="form-control", type="number", min=1, value="345600", name="queue-retention")
+        div(class="row d-flex justify-content-end")
+          button(type="button", class="btn btn-success mb-5", onClick="save()")= "Create table"
+    script(src='/javascripts/sqs/sqs-create.js')
+    script(src='/javascripts/httpRequest.js')

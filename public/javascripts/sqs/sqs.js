@@ -16,3 +16,7 @@ function deleteQueue(sqsName) {
     location.reload();
   });
 }
+
+function createQueue() {
+  window.location = "/sqs/create";
+}

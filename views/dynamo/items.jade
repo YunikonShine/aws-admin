@@ -1,0 +1,51 @@
+doctype html
+html
+  include ../includes/bootstrap.jade
+  body
+    div(class="container-fluid")
+      div(class="row")
+        div(class="col-md-12")
+          div(class="d-flex ml-3 mt-3 mb-3")
+            a(href="/")= `AWS`
+            span(class="ml-1 mr-1")= " / "
+            a(href="/dynamo")= `Dynamo`
+            span(class="ml-1 mr-1")= " / "
+            a(href=`/dynamo/${tableName}`)= ` ${tableName}`
+          div(class="d-flex ml-3 mt-3 mb-3")
+            button(class="btn btn-secondary mr-2", onClick="addFilter()")= "Add filter"
+            button(class="btn btn-info mr-2 ml-2", onClick="setUrl('/dynamo/#{tableName}/meta')")= "Meta"
+            button(class="btn btn-success mr-2 ml-2", onClick="setUrl('/dynamo/#{tableName}/item')")= "Create"
+          div(id="filter")
+          div(class="d-flex ml-3 mt-3 mb-3")
+            button(class="btn btn-primary mr-2", onClick="filter('#{tableName}')")= "Filter"
+          div(class="table-container")
+            if items.itemsList.length > 0
+              table(class="table table-striped table-bordered", id="tableItems")
+                thead
+                  -let keys= []
+                  -let columns= []
+                  tr
+                    td= "Object"
+                    each hValue, hKey in items.itemsList[0].keys
+                      td= hKey
+                      -keys.push(hKey)
+                    each hValue in items.tableColumns
+                      td=hValue
+                      -columns.push(hValue)
+                tbody
+                  each i in items.itemsList
+                    tr
+                      -let query= ""
+                      each tValue, tKey in i.keys
+                        -query+= `${tKey}=${tValue}&`
+                      td
+                        a(href="/dynamo/"+tableName+"/item?"+query)= "View"
+                      each tValue in keys
+                        td= i.keys[tValue]
+                      each tValue in columns
+                        td= i.item[tValue] || "undefined"
+    script(src='/javascripts/dynamo/dynamo-items.js')
+    script(src='/javascripts/httpRequest.js')
+    if items.itemsList.length > 0
+      script setKeys(!{JSON.stringify(items.itemsList[0].keys)})
+    script setQuery(!{JSON.stringify(query)})

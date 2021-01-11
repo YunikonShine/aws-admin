@@ -1,0 +1,22 @@
+html
+    include ./includes/bootstrap.jade
+    body
+        div(class="d-flex justify-content-center mt-3")
+            h2= "Avaliable AWS Services"
+        div(class="container-fluid")
+            div(class="row")
+                div(class="col-md-4")
+                    a(href="/dynamo")
+                        div(class="d-flex flex-column justify-content-center mt-3 image-div-size align-items-center")
+                            img(src="/images/Dynamo.svg", class="image-size")
+                            h3= "Dynamo"
+                div(class="col-md-4")
+                    a(href="/sqs")
+                        div(class="d-flex flex-column justify-content-center mt-3 image-div-size align-items-center")
+                            img(src="/images/SQS.svg", class="image-size")
+                            h3= "SQS"
+                div(class="col-md-4")
+                    a(href="/s3")
+                        div(class="d-flex flex-column justify-content-center mt-3 image-div-size align-items-center")
+                            img(src="/images/S3.svg", class="image-size")
+                            h3= "SQS"

@@ -1,0 +1,31 @@
+html
+  include ../includes/bootstrap.jade
+  body
+    div(class="container-fluid")
+      div(class="row")
+        div(class="col-md-12")
+          div(class="d-flex ml-3 mt-3 mb-3")
+            a(href="/")= `AWS`
+            span(class="ml-1 mr-1")= " / "
+            a(href="/s3")= `S3`
+            span(class="ml-1 mr-1")= " / "
+            a(href=`/s3/${bucketName}`)= ` ${bucketName}`
+          div(class="d-flex ml-3 mt-3 mb-3")
+            button(class="btn btn-secondary mr-2", onClick="upload()")= "Upload item"
+            input(type="file", id="file", class="d-none")= "Upload"
+          div(class="container")
+            table(class="table table-striped table-bordered", id="tableList", style="width:100%")
+              thead
+                tr
+                  th= "Name"
+                  th= "Actions"
+              tbody
+                each i in items
+                  tr
+                    td
+                      a(href="/s3/" + i.name)= i.name
+                    td
+                      div(class="d-flex justify-content-center")
+                        button(type="button", class="btn btn-danger ml-2", onClick='deleteItem(\'' + i.name + '\')')= "Delete"
+    script(src='/javascripts/s3/items.js')
+    script(src='/javascripts/httpRequest.js')

@@ -1,0 +1,23 @@
+html
+  include ../includes/bootstrap.jade
+  body
+    div(class="container-fluid")
+      div(class="row")
+        div(class="col-md-12")
+          div(class="d-flex ml-3 mt-3 mb-3")
+            a(href="/")= "AWS"
+            span(class="ml-1 mr-1")= " / "
+            a(href="/dynamo")= `Dynamo`
+            span(class="ml-1 mr-1")= " / "
+            a(href=`/dynamo/${tableName}`)= ` ${tableName}`
+            span(class="ml-1 mr-1")= " / "
+            a(href="/dynamo/#{tableName}/meta")= "Meta"
+      div(class="row mb-3")
+        div(class="col-md-12")
+          button(class="btn btn-danger ml-2", onClick="deleteTable(#{tableName})")= "Delete table"
+      div(class="row")
+        div(class="col-md-12")
+          div(id="editor")
+    script(src='/javascripts/dynamo/dynamo-meta.js')
+    script(src='/javascripts/httpRequest.js')
+    script setJson(!{JSON.stringify(meta)})

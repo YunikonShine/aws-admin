@@ -1,0 +1,64 @@
+html
+  include ../includes/bootstrap.jade
+  body
+    div(class="container-fluid")
+      div(class="row")
+        div(class="col-md-12")
+          div(class="d-flex ml-3 mt-3 mb-3")
+            a(href="/")= `AWS`
+            span(class="ml-1 mr-1")= " / "
+            a(href="/dynamo")= `Dynamo`
+            span(class="ml-1 mr-1")= " / "
+            a(href="/dynamo/create")= `Create table`
+      div(class="container")
+        div(class="row")
+          h3="Create table"
+        div(class="row")
+          div(class="col-md-12")
+            div(class="form-group")
+              label="Table name"
+              input(class="form-control", name="table-name")
+        div(class="row")
+          div(class="col-md-6")
+            div(class="form-group")
+              label="Hash attribute name"
+              input(class="form-control", name="table-hash-name")
+          div(class="col-md-6")
+            div(class="form-group")
+              label="Hash attribute type"
+              select(class="form-control", name="table-hash-type")
+                option(value="S")="String"
+                option(value="N")="Number"
+                option(value="B")="Binary"
+        div(class="row")
+          div(class="col-md-6")
+            div(class="form-group")
+              label="Range attribute name (Optional)"
+              input(class="form-control", name="table-range-name")
+          div(class="col-md-6")
+            div(class="form-group")
+              label="Range attribute type (Optional)"
+              select(class="form-control", name="table-range-type")
+                option=""
+                option(value="S")="String"
+                option(value="N")="Number"
+                option(value="B")="Binary"
+        div(class="row")
+          div(class="col-md-6")
+            div(class="form-group")
+              label="Read capacity units"
+              input(class="form-control", type="number", min=1, value="3", name="table-read")
+          div(class="col-md-6")
+            div(class="form-group")
+              label="Write capacity units"
+              input(class="form-control", type="number", min=1, value="3", name="table-write")
+        hr
+        div(class="row")
+          h3="Secondary Indexes"
+        div(id="secondaryIndex")
+        div(class="row")
+          button(type="button", class="btn btn-primary mb-3 mt-3", onClick="addIndex()")= "Add index"
+        div(class="row d-flex justify-content-end")
+          button(type="button", class="btn btn-success mb-5", onClick="save()")= "Create table"
+    script(src='/javascripts/dynamo/dynamo-create-table.js')
+    script(src='/javascripts/httpRequest.js')

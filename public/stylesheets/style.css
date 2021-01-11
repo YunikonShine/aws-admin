@@ -1,0 +1,55 @@
+.table-container {
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  position: relative;
+}
+
+.dataTables_info {
+  padding: 0 !important;
+}
+
+#editor {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 80vh;
+}
+
+#tableItems {
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+
+.image-size {
+  width: 250px;
+  height: 250px;
+}
+
+.image-div-size {
+  width: 300px;
+  height: 300px;
+}
+
+.key-size {
+  width: 350px;
+}
+
+.value-size {
+  width: 500px;
+}
+
+.query-size {
+  width: 150px;
+}
+
+.index-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 8px;
+}

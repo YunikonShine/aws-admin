@@ -10,6 +10,12 @@ let {
   createBucket,
   getMeta,
 } = require("../services/aws/s3");
+const redis = require('redis');
+const client = redis.createClient({
+    host: 'localhost',
+    port: 6379,
+    password: '75eFx^Yh]vH/jYKw'
+});
 
 router.get("/s3", async function (req, res, next) {
   res.render("s3/index", { buckets: await listBuckets() });
@@ -56,6 +62,28 @@ router.put("/s3/:bucket/item", async function (req, res, next) {
 router.post("/s3/bucket", async function (req, res, next) {
   await createBucket(req.body.name);
   res.status(200).end();
+});
+
+router.post("/s3/temp", async function (req, res, next) {
+  var jobs = [];
+  client.keys('*', function (err, keys) {
+      if (err) return console.log(err);
+      if(keys){
+          async.map(keys, function(key, cb) {
+              client.get(key, function (error, value) {
+                  if (error) return cb(error);
+                  var job = {};
+                  job['jobId']=key;
+                  job['data']=value;
+                  cb(null, job);
+              }); 
+          }, function (error, results) {
+              if (error) return console.log(error);
+              console.log(results);
+              res.json({data:results});
+          });
+      }
+  });
 });
 
 module.exports = router;

@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var dynamoRouter = require('./routes/dynamo');
 var sqsRouter = require('./routes/sqs');
 var s3Router = require('./routes/s3');
+var redisRouter = require('./routes/redis');
 
 var app = express();
 
@@ -25,6 +26,7 @@ app.use('/', indexRouter);
 app.use('/', dynamoRouter);
 app.use('/', sqsRouter);
 app.use('/', s3Router);
+app.use('/', redisRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -41,5 +43,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb', extended: true, parameterLimit: 50000}));
 
 module.exports = app;
